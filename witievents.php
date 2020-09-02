@@ -12,3 +12,6 @@ Author URI: https://richardhogge.github.io/
 if (!defined( 'ABSPATH')) {
   exit;
 }
+
+// Load scripts 
+require_once(plugin_dir_path(__FILE__) . '/includes/witievents-scripts.php');
