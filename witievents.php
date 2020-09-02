@@ -7,3 +7,8 @@ Version: 1.0.0
 Author: Richard Hogge
 Author URI: https://richardhogge.github.io/
 */
+
+// Exit if accessed directly
+if (!defined( 'ABSPATH')) {
+  exit;
+}
