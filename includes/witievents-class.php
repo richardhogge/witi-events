@@ -24,8 +24,8 @@ class WITI_Events_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database
 	 */
 	public function widget( $args, $instance ) {
-    echo $args['before_widget']; // Whatever you want to display before widget (<div>, etc.)
-  
+		echo $args['before_widget'];
+
 		// if ( ! empty( $instance['title'] ) ) {
 		// 	echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
     // }
@@ -42,45 +42,47 @@ class WITI_Events_Widget extends WP_Widget {
 ?>
 
 <!-- Begin Events Markup -->
-<?php if ( $events > 0 ) : ?>
+<div id="witi-events">
 
-<ul>
+	<?php if ( $events > 0 ) : ?>
 
-	<?php for ( $i = 0; $i < $events; $i++ ) { ?>
+	<ul>
 
-	<li>
-		<a href="<?php echo $data[$i]['url']; ?>" target="_blank">
-			<?php echo $data[$i]['name']; ?>
-		</a><br>
-		<?php echo date( 'F j, Y', strtotime( $data[$i]['date_start'] ) ); ?>
+		<?php for ( $i = 0; $i < $events; $i++ ) { ?>
 
-		<?php if ( $data[$i]['date_start'] !== $data[$i]['date_end'] ) : ?>
+		<li>
+			<a href="<?php echo $data[$i]['url']; ?>" target="_blank">
+				<?php echo $data[$i]['name']; ?>
+			</a><br>
+			<?php echo date( 'F j, Y', strtotime( $data[$i]['date_start'] ) ); ?>
 
-		–	<?php echo date( 'F j, Y', strtotime( $data[$i]['date_end'] ) ); ?>
+			<?php if ( $data[$i]['date_start'] !== $data[$i]['date_end'] ) : ?>
 
-		<?php endif; ?>
-		
-		<br>
-		Online
-	</li>
+			–	<?php echo date( 'F j, Y', strtotime( $data[$i]['date_end'] ) ); ?>
 
-	<?php	} ?>
+			<?php endif; ?>
+			
+			<br>
+			Online
+		</li>
 
-</ul>
+		<?php	} ?>
+
+	</ul>
+
+	<?php else : ?>
+
+	<p>
+		Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.
+	</p>
+			
+	<?php endif; ?>
+
+</div>
 <!-- End Events Markup -->
 
-<?php else : ?>
-
-<!-- Begin Fallback Message -->
-<p>
-	Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.
-</p>
-<!-- End Fallback Message -->
-		
-<?php endif; ?>
-
 <?php
-		echo $args['after_widget']; // Whatever you want to display after widget (</div>, etc.)
+		echo $args['after_widget'];
 	}
 
 	/**
