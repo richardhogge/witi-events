@@ -41,6 +41,7 @@ class WITI_Events_Widget extends WP_Widget {
 		$events = count( $data );
 ?>
 
+<!-- Begin Events Markup -->
 <?php if ( $events > 0 ) : ?>
 
 <ul>
@@ -66,12 +67,15 @@ class WITI_Events_Widget extends WP_Widget {
 	<?php	} ?>
 
 </ul>
+<!-- End Events Markup -->
 
 <?php else : ?>
 
+<!-- Begin Fallback Message -->
 <p>
 	Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.
 </p>
+<!-- End Fallback Message -->
 		
 <?php endif; ?>
 
