@@ -26,13 +26,45 @@ class WITI_Events_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
     echo $args['before_widget']; // Whatever you want to display before widget (<div>, etc.)
   
-		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
-    }
+		// if ( ! empty( $instance['title'] ) ) {
+		// 	echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+    // }
     
     // Widget content output
-    echo 'Hello from WITI Events Widget...';
-  
+		$response = wp_remote_get( 'https://witi.com/api/events/all/index.php' ); // Get all upcoming conferences and networks events from API endpoint 
+
+		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
+			$data = json_decode( $response['body'], true );
+		}
+
+		// Count events
+		$events = count( $data );
+
+		if ( $events > 0 ) :
+
+			// List events
+			echo '<ul>';
+
+			for ( $i = 0; $i < $events; $i++ ) {
+				echo '<li>';
+				echo		'<a href="' . $data[$i]['url'] . '" target="_blank">';
+				echo       $data[$i]['name'];
+				echo    '</a><br>';
+				echo    date( 'F m, Y', strtotime( $data[$i]['date_start'] ) ) . '<br>';
+				echo 		'Online';
+				echo '</li>';
+			}
+
+			echo '</ul>';
+
+		else :
+
+			echo '<p>';
+			echo    'Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.';
+			echo '</p>';
+		
+		endif;
+
 		echo $args['after_widget']; // Whatever you want to display after widget (</div>, etc.)
 	}
 

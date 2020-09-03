@@ -9,20 +9,20 @@ Author URI: https://richardhogge.github.io/
 */
 
 // Exit if accessed directly
-if (!defined( 'ABSPATH')) {
+if ( !defined( 'ABSPATH' ) ) {
   exit;
 }
 
 // Load Scripts
-require_once(plugin_dir_path(__FILE__) . '/includes/witievents-scripts.php');
+require_once( plugin_dir_path(__FILE__) . '/includes/witievents-scripts.php' );
 
 // Load Class
-require_once(plugin_dir_path(__FILE__) . '/includes/witievents-class.php');
+require_once( plugin_dir_path(__FILE__ ) . '/includes/witievents-class.php' );
 
 // Register Widget
 function register_witievents() {
-  register_widget('WITI_Events_Widget');
+  register_widget( 'WITI_Events_Widget' );
 }
 
 // Hook in function
-add_action('widgets_init', 'register_witievents');
+add_action( 'widgets_init', 'register_witievents' );
