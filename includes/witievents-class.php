@@ -39,32 +39,35 @@ class WITI_Events_Widget extends WP_Widget {
 
 		// Count events
 		$events = count( $data );
+?>
 
-		if ( $events > 0 ) :
+<?php if ( $events > 0 ) : ?>
 
-			// List events
-			echo '<ul>';
+<ul>
 
-			for ( $i = 0; $i < $events; $i++ ) {
-				echo '<li>';
-				echo		'<a href="' . $data[$i]['url'] . '" target="_blank">';
-				echo       $data[$i]['name'];
-				echo    '</a><br>';
-				echo    date( 'F m, Y', strtotime( $data[$i]['date_start'] ) ) . '<br>';
-				echo 		'Online';
-				echo '</li>';
-			}
+	<?php for ( $i = 0; $i < $events; $i++ ) { ?>
 
-			echo '</ul>';
+	<li>
+		<a href="<?php echo $data[$i]['url']; ?>" target="_blank">
+			<?php echo $data[$i]['name']; ?>
+		</a><br>
+		<?php echo date( 'F m, Y', strtotime( $data[$i]['date_start'] ) ); ?><br>
+		Online
+	</li>
 
-		else :
+	<?php	} ?>
 
-			echo '<p>';
-			echo    'Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.';
-			echo '</p>';
+</ul>
+
+<?php else : ?>
+
+<p>
+	Sorry, there are no upcoming WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.
+</p>
 		
-		endif;
+<?php endif; ?>
 
+<?php
 		echo $args['after_widget']; // Whatever you want to display after widget (</div>, etc.)
 	}
 
@@ -77,21 +80,22 @@ class WITI_Events_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'WITI Events', 'witi_domain' );
-		?>
+?>
 
-    <!-- Title -->
-		<p>
-		  <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-        <?php esc_attr_e( 'Title:', 'witi_domain' ); ?>
-      </label> 
-		  <input
-        class="widefat"
-        id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
-        name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" 
-        type="text"
-        value="<?php echo esc_attr( $title ); ?>">
-		</p>
-		<?php 
+<!-- Title -->
+<p>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
+		<?php esc_attr_e( 'Title:', 'witi_domain' ); ?>
+	</label> 
+	<input
+		class="widefat"
+		id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
+		name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" 
+		type="text"
+		value="<?php echo esc_attr( $title ); ?>">
+</p>
+
+<?php
 	}
 
 	/**
