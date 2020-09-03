@@ -51,7 +51,15 @@ class WITI_Events_Widget extends WP_Widget {
 		<a href="<?php echo $data[$i]['url']; ?>" target="_blank">
 			<?php echo $data[$i]['name']; ?>
 		</a><br>
-		<?php echo date( 'F m, Y', strtotime( $data[$i]['date_start'] ) ); ?><br>
+		<?php echo date( 'F j, Y', strtotime( $data[$i]['date_start'] ) ); ?>
+
+		<?php if ( $data[$i]['date_start'] !== $data[$i]['date_end'] ) : ?>
+
+		–	<?php echo date( 'F j, Y', strtotime( $data[$i]['date_end'] ) ); ?>
+
+		<?php endif; ?>
+		
+		<br>
 		Online
 	</li>
 
