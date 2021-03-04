@@ -37,8 +37,10 @@ class WITI_Events_Widget extends WP_Widget {
 			$data = json_decode( $response['body'], true );
 		}
 
-		// Count events
-		$events = count( $data );
+		if ( !empty( $data ) ) {
+	
+			// Count events
+			$events = count( $data );
 ?>
 
 <!-- Begin Events Markup -->
@@ -82,6 +84,16 @@ class WITI_Events_Widget extends WP_Widget {
 <!-- End Events Markup -->
 
 <?php
+		} else {
+?>
+
+	<p>
+		Sorry, there is a problem loading the WITI Events at this time. Please visit <a href="https://witi.com" target="_blank">witi.com/events</a> for more details.
+	</p>
+
+<?php
+		}
+
 		echo $args['after_widget'];
 	}
 
